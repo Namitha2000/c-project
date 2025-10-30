@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void biggest3() {
-    int a = 2, b = 22, c = 10;
+    int a = 10, b = 22, c = 10;
 
     if (a >= b) {
         if (a >= c)
