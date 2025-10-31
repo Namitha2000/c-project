@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 unsigned int factorialCalc(unsigned int N) {
-    int fact = 1;
+    int fact = 3;
     for (int i = 1; i <= N; i++) {
         fact *= i;
     }
