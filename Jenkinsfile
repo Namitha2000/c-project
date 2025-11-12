@@ -1,25 +1,30 @@
 pipeline {
     agent any
     stages {
-    stage('Build)
-    {
-      steps {
-        sh 'sleep 5'; echo "this is a build stage"
+        stage('Build') {
+            steps {
+                sh 'sleep 5'
+                echo "This is a build stage"
+            }
+        }
 
-      }
+        stage('Test') {
+            steps {
+                sh '''
+                    sleep 5
+                    echo "This is a test stage"
+                '''
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                    sleep 5
+                    echo "This is a deploy stage"
+                '''
+            }
+        }
     }
-    stage('Test)
-    {
-      sh '''
-         sleep 5
-         echo "this is a test stage"
-     '''    
-    }
-    stage('Deploy') {
-      sh '''
-         sleep 5
-         echo "this is a Deploy stage"
-         '''
-    }
-  }
 }
+
