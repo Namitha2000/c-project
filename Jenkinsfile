@@ -1,8 +1,7 @@
 pipeline {
-    agent none
+    agent { label 'master'}
     stages {
         stage('Build') {
-            agent { label 'SlaveNode' }
             steps {
                 sh 'sleep 5'
                 echo "This is a build stage"
@@ -10,7 +9,6 @@ pipeline {
         }
 
         stage('Test') {
-            agent { label 'SlaveNode' }
             steps {
                 sh '''
                     sleep 5
@@ -20,7 +18,6 @@ pipeline {
         }
 
         stage('Deploy') {
-            agent { label 'master' }
             steps {
                 sh '''
                     sleep 5
@@ -30,5 +27,3 @@ pipeline {
         }
     }
 }
-
-
