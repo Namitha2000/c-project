@@ -1,28 +1,41 @@
 pipeline {
-    agent { label 'master'}
+    agent any
+
     stages {
-        stage('Build') {
+
+        stage('Clone Repository') {
             steps {
-                sh 'sleep 5'
-                echo "This is a build stage"
+                echo "Cloning C project from GitHub"
+                git url: 'https://github.com/Namitha2000/c-project.git'
             }
         }
 
-        stage('Test') {
-            steps {
-                sh '''
-                    sleep 5
-                    echo "This is a test stage"
-                '''
+        stage('Build & Test') {
+            parallel {
+                stage('Build') {
+                    steps {
+                        echo "Compiling the C project"
+                        sh 'make'
+                    }
+                }
+                stage('Run Tests') {
+                    steps {
+                        echo "Running test programs"
+                        sh '''
+                        # Run executable if it exists
+                        if [ -f ABC.exe ]; then
+                            ./ABC.exe || true
+                        fi
+                        '''
+                    }
+                }
             }
         }
 
-        stage('Deploy') {
+        stage('Archive Artifacts') {
             steps {
-                sh '''
-                    sleep 5
-                    echo "This is a deploy stage"
-                '''
+                echo "Saving compiled binaries"
+                archiveArtifacts artifacts: '*.o, *.exe', fingerprint: true
             }
         }
     }
