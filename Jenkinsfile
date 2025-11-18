@@ -6,7 +6,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 echo "Cloning C project from GitHub"
-                git url: 'https://github.com/Namitha2000/c-project.git'
+                git branch: 'main'  url: 'https://github.com/Namitha2000/c-project.git'
             }
         }
 
